@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 
-import MovieCard from "./MovieCard";
+import MovieCard from "./component/MovieCard";
 
 import './App.css';
 import SearchIcon from './search.svg';
@@ -13,23 +14,27 @@ const API_URL = 'http://www.omdbapi.com?apikey=451a7a58';
 const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [movies, setMovies] = useState([]);
+    const [error, setError] = React.useState(null);
 
     useEffect(()=>{
         searchMovies(searchTerm);  
     }, []);
 
     const searchMovies = async (title) => {
-        const response = await fetch(`${API_URL}&s=${title}`);
-        const data = await response.json();
-
-        setMovies(data.Search);
-        console.log(data.Search);
+        axios.get(`${API_URL}&s=${title}`).then((response)=>{
+            if(response.data? setMovies(response.data.Search): setMovies([]))
+            setMovies(response.data.Search);
+            console.log(response);
+        }).catch(error => {
+            setError(error);
+        });
+        console.log(error);
     }
 
 
     return(
         <div className="app">
-            <h1>MOVIEMAGS</h1>
+            <h1>MOVIESMAG</h1>
             <div className="search">
                 <input
                     placeholder="Search for movies"
