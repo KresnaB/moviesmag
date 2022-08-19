@@ -17,19 +17,20 @@ const App = () => {
     const [error, setError] = React.useState(null);
 
     useEffect(()=>{
+        const searchMovies = async (title) => {
+            axios.get(`${API_URL}&s=${title}`).then((response)=>{
+                if(response.data? setMovies(response.data.Search): setMovies([]))
+                setMovies(response.data.Search);
+                console.log(response);
+            }).catch(error => {
+                setError(error);
+            });
+            console.log(error);
+        }
         searchMovies(searchTerm);  
     }, []);
 
-    const searchMovies = async (title) => {
-        axios.get(`${API_URL}&s=${title}`).then((response)=>{
-            if(response.data? setMovies(response.data.Search): setMovies([]))
-            setMovies(response.data.Search);
-            console.log(response);
-        }).catch(error => {
-            setError(error);
-        });
-        console.log(error);
-    }
+    
 
 
     return(
