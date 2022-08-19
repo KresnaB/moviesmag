@@ -5,6 +5,7 @@ import MovieCard from "./component/MovieCard";
 
 import './App.css';
 import SearchIcon from './search.svg';
+import Icon from './icon.svg';
 
 //451a7a58
 
@@ -28,7 +29,14 @@ const App = () => {
 
     return(
         <div className="app">
-            <h1>MOVIESMAG</h1>
+            <div className="title">
+                <img 
+                    className="icon"
+                    src={Icon}
+                    alt="icon"
+                />
+                <h1>MOVIESMAG</h1>
+            </div>
             <div className="search">
                 <input
                     placeholder="Search for movies"

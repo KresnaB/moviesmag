@@ -31,7 +31,7 @@ h1 {
   letter-spacing: 0.9px;
   background: linear-gradient(
     90deg,
-    rgba(249, 211, 180, 1) 0%,
+    rgba(249, 211, 180, 1) 75%,
     rgba(249, 211, 180, 0) 100%
   );
   background-clip: text;
@@ -66,6 +66,11 @@ h1 {
   outline: none;
   color: #a1a1a1;
   background: #1f2123;
+}
+
+.icon{
+  width: 60px;
+  height: 60px;
 }
 
 .search img {
@@ -103,7 +108,11 @@ h1 {
   color: #f9d3b4;
   font-family: var(--font-raleway);
 }
-
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .container {
   width: 100%;
   margin-top: 3rem;
