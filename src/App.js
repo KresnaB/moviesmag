@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
 
 import MovieCard from "./component/MovieCard";
 
@@ -14,25 +13,18 @@ const API_URL = 'http://www.omdbapi.com?apikey=451a7a58';
 const App = () => {
     const [searchTerm, setSearchTerm] = useState('the batman');
     const [movies, setMovies] = useState([]);
-    const [error, setError] = React.useState(null);
 
     useEffect(()=>{
-        searchMovies(searchTerm);  
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        searchMovies("the batman");  
     }, []);
 
     const searchMovies = async (title) => {
-        axios.get(`${API_URL}&s=${title}`).then((response)=>{
-            if(response.data? setMovies(response.data.Search): setMovies([]))
-            setMovies(response.data.Search);
-            console.log(response);
-        }).catch(error => {
-            setError(error);
-        });
-        console.log(error);
-    }
-
+        const response = await fetch(`${API_URL}&s=${title}`);
+        const data = await response.json();
     
+        setMovies(data.Search);
+    };
+
 
     return(
         <div className="app">
