@@ -16,7 +16,10 @@ const App = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = React.useState(null);
 
-    
+    useEffect(()=>{
+        searchMovies(searchTerm);  
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const searchMovies = async (title) => {
         axios.get(`${API_URL}&s=${title}`).then((response)=>{
@@ -29,9 +32,7 @@ const App = () => {
         console.log(error);
     }
 
-    useEffect(()=>{
-        searchMovies(searchTerm);  
-    }, []);
+    
 
     return(
         <div className="app">
